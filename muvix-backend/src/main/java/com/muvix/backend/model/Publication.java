@@ -2,6 +2,7 @@ package com.muvix.backend.model;
 
 import jakarta.persistence.*;
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;
@@ -62,5 +63,7 @@ public class Publication {
 
     @Column(name="box_id")
     private Long boxId;
+    @Column(nullable=false,updatable=false)
+    private Instant createdAt=Instant.now();
 
 }

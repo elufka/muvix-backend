@@ -122,9 +122,11 @@ public class PublicationService {
         return mapper.toResponse(publications.save(batch));
     }
     @Transactional public PublicationResponse update(Long id,ReplaceItemRequest request,String email,boolean admin){
-        Publication publication=publications.findById(id).orElse(null);
+        Publication publication=publications.findByIdForUpdate(id).orElse(null);
         if(publication!=null){
             requireOwnerOrAdmin(publication.getSeller(),email,admin);
+            if(publication.getState()==Publication.State.RESERVED||publication.getState()==Publication.State.SOLD)
+                throw new ConflictException("Reserved or sold publications cannot be edited");
             if(new HashSet<>(request.getProductIds()).size()!=request.getProductIds().size()) throw new ConflictException("Duplicate product IDs are not allowed");
             if(publication.getType()==Publication.Type.INDIVIDUAL&&request.getProductIds().size()!=1) throw new ConflictException("An individual listing must contain exactly one product ID");
             for(Long productId:request.getProductIds()){

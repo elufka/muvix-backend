@@ -23,6 +23,8 @@ public class OpenApiConfig {
                                 .bearerFormat("JWT")
                                 .description("Use the accessToken returned by the authentication endpoints.")))
                 .addTagsItem(new Tag().name("Authentication").description("Register, authenticate, refresh tokens, and read the current profile."))
-                .addTagsItem(new Tag().name("Publications").description("Browse and manage individual and batch publications."));
+                .addTagsItem(new Tag().name("Publications").description("Browse and manage individual and batch publications."))
+                .addTagsItem(new Tag().name("Reservations").description("Reserve publications, cancel reservations, and confirm pickups with a PIN."))
+                .addTagsItem(new Tag().name("Boxes").description("Group publications into sell, purchase, and full relocation boxes."));
     }
 }

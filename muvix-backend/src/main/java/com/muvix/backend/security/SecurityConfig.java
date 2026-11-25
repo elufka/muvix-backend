@@ -20,7 +20,9 @@ public class SecurityConfig {
     @Bean SecurityFilterChain securityFilterChain(HttpSecurity http)throws Exception {
         return http.csrf(csrf->csrf.disable()).cors(cors->{}).sessionManagement(s->s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .exceptionHandling(e->e.authenticationEntryPoint(entryPoint).accessDeniedHandler(denied))
-            .authorizeHttpRequests(a->a.requestMatchers("/api/v1/auth/me","/api/v1/publication/me","/api/v1/publication/me/**","/api/v1/listings/me","/api/v1/listings/me/**").authenticated()
+            .authorizeHttpRequests(a->a.requestMatchers(org.springframework.http.HttpMethod.GET,"/api/v1/boxes/me").authenticated()
+                .requestMatchers(org.springframework.http.HttpMethod.GET,"/api/v1/boxes/catalog","/api/v1/boxes/*").permitAll()
+                .requestMatchers("/api/v1/auth/me","/api/v1/reservations/**","/api/v1/boxes/me","/api/v1/boxes/me/**","/api/v1/boxes/*/publications/**","/api/v1/boxes/*","/api/v1/boxes").authenticated()
                 .requestMatchers("/api/v1/auth/register","/api/v1/auth/login","/api/v1/auth/refresh-token").permitAll()
                 .requestMatchers(org.springframework.http.HttpMethod.GET,"/api/v1/publication","/api/v1/publication/*","/api/v1/listings","/api/v1/listings/*").permitAll()
                 .requestMatchers("/v3/api-docs/**","/swagger-ui/**","/swagger-ui.html").permitAll()

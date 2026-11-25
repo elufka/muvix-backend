@@ -14,5 +14,8 @@ public interface PublicationMapper {
     Publication toEntity(CreatePublicationRequest request);
     @Mapping(target="id",source="id")
     @Mapping(target="sellerId",source="seller.id")
+    @Mapping(target="userId",source="seller.id")
+    @Mapping(target="status",expression="java(publication.getState().name())")
+    @Mapping(target="coverImage",expression="java(publication.getImages().isEmpty() ? null : publication.getImages().get(0))")
     PublicationResponse toResponse(Publication publication);
 }
