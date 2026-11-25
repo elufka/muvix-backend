@@ -2,25 +2,36 @@ package com.muvix.backend.dto.request;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import io.swagger.v3.oas.annotations.media.Schema;
+@Getter @Setter @NoArgsConstructor
+@Schema(name="RegisterRequest")
 public class RegisterRequest {
     private String photo;
+    @Schema(example="Ava",description="User's first name.")
     @NotBlank
     @Size(max=100)
     private String firstName;
 
+    @Schema(example="Rivera",description="User's last name.")
     @NotBlank
     @Size(max=100)
     private String lastName;
 
+    @Schema(example="ava@example.com")
     @NotBlank
     @Email
     @Size(max=254)
     private String email;
 
+    @Schema(format="password",description="At least 8 characters.")
     @NotBlank
     @Size(min=8, max=100)
     private String password;
 
+    @Schema(example="+1 555 0100")
     @NotBlank
     @Size(max=40)
     private String phone;
@@ -41,14 +52,4 @@ public class RegisterRequest {
     @Size(max=255)
     private String address;
 
-    public String getPhoto(){return photo;} public void setPhoto(String v){photo=v;}
-    public String getFirstName(){return firstName;} public void setFirstName(String v){firstName=v;}
-    public String getLastName(){return lastName;} public void setLastName(String v){lastName=v;}
-    public String getEmail(){return email;} public void setEmail(String v){email=v;}
-    public String getPassword(){return password;} public void setPassword(String v){password=v;}
-    public String getPhone(){return phone;} public void setPhone(String v){phone=v;}
-    public String getCountry(){return country;} public void setCountry(String v){country=v;}
-    public String getProvince(){return province;} public void setProvince(String v){province=v;}
-    public String getCity(){return city;} public void setCity(String v){city=v;}
-    public String getAddress(){return address;} public void setAddress(String v){address=v;}
 }

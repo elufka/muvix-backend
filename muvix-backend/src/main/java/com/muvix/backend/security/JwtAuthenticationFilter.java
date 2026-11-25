@@ -10,14 +10,12 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
+import lombok.RequiredArgsConstructor;
 @Component
+@RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final JwtService jwt;
     private final UserDetailsService users;
-
-    public JwtAuthenticationFilter(JwtService jwt,UserDetailsService users){
-        this.jwt=jwt;this.users=users;
-    }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,HttpServletResponse response,FilterChain chain) throws ServletException,IOException {

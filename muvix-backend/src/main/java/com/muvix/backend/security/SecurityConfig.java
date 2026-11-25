@@ -9,15 +9,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import lombok.RequiredArgsConstructor;
 @Configuration @EnableMethodSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
     private final JwtAuthenticationFilter jwtFilter;
     private final AuthEntryPoint entryPoint;
     private final ApiAccessDeniedHandler denied;
-
-    public SecurityConfig(JwtAuthenticationFilter jwtFilter,AuthEntryPoint entryPoint,ApiAccessDeniedHandler denied){
-        this.jwtFilter=jwtFilter;this.entryPoint=entryPoint;this.denied=denied;
-    }
 
     @Bean SecurityFilterChain securityFilterChain(HttpSecurity http)throws Exception {
         return http.csrf(csrf->csrf.disable()).cors(cors->{}).sessionManagement(s->s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

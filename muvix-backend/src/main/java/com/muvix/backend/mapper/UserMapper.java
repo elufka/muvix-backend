@@ -1,11 +1,9 @@
 package com.muvix.backend.mapper;
 import com.muvix.backend.dto.request.RegisterRequest;
-import com.muvix.backend.dto.response.RoleResponse;
 import com.muvix.backend.dto.response.UserResponse;
 import com.muvix.backend.model.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import java.util.List;
 @Mapper(componentModel="spring")
 public interface UserMapper {
     @Mapping(target="id", ignore=true)

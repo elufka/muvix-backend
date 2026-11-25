@@ -4,11 +4,18 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 @Entity
 @Table(name="publications")
+@Getter @Setter @NoArgsConstructor
 public class Publication {
+    @Schema(description="INDIVIDUAL publications have one product ID; BATCH publications have multiple.")
     public enum Type { INDIVIDUAL, BATCH }
+    @Schema(description="Publication availability in the catalog.")
     public enum State { AVAILABLE, PAUSED, RESERVED, SOLD, SOFT_DELETED }
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE,generator="publicationIdGenerator")
@@ -56,16 +63,4 @@ public class Publication {
     @Column(name="box_id")
     private Long boxId;
 
-    public Publication(){}
-    public Long getId(){return id;} public Type getType(){return type;} public void setType(Type v){type=v;}
-    public User getSeller(){return seller;} public void setSeller(User v){seller=v;}
-    public String getTitle(){return title;} public void setTitle(String v){title=v;}
-    public String getDescription(){return description;} public void setDescription(String v){description=v;}
-    public BigDecimal getPrice(){return price;} public void setPrice(BigDecimal v){price=v;}
-    public State getState(){return state;} public void setState(State v){state=v;}
-    public String getCategory(){return category;} public void setCategory(String v){category=v;}
-    public ProductCondition getCondition(){return condition;} public void setCondition(ProductCondition v){condition=v;}
-    public List<String> getImages(){return images;} public void setImages(List<String> v){images=v==null?new ArrayList<>():new ArrayList<>(v);}
-    public List<Long> getProductIds(){return productIds;} public void setProductIds(List<Long> v){productIds=v==null?new ArrayList<>():new ArrayList<>(v);}
-    public Long getBoxId(){return boxId;} public void setBoxId(Long v){boxId=v;}
 }

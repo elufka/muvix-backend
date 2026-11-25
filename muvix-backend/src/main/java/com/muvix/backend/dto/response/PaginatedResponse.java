@@ -1,11 +1,15 @@
 package com.muvix.backend.dto.response;
 import java.util.List;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import io.swagger.v3.oas.annotations.media.Schema;
+@Getter @Setter @NoArgsConstructor
+@Schema(name="PaginatedResponse")
 public class PaginatedResponse<T> {
     private List<T> items;
     private int page,size,totalPages;
     private long totalElements;
-
-    public PaginatedResponse(){}
 
     public PaginatedResponse(List<T> items,int page,int size,long totalElements,int totalPages){
         this.items=items;
@@ -15,9 +19,4 @@ public class PaginatedResponse<T> {
         this.totalPages=totalPages;
     }
 
-    public List<T> getItems(){return items;} public void setItems(List<T> v){items=v;}
-    public int getPage(){return page;} public void setPage(int v){page=v;}
-    public int getSize(){return size;} public void setSize(int v){size=v;}
-    public long getTotalElements(){return totalElements;} public void setTotalElements(long v){totalElements=v;}
-    public int getTotalPages(){return totalPages;} public void setTotalPages(int v){totalPages=v;}
 }

@@ -5,11 +5,11 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.*;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import lombok.RequiredArgsConstructor;
 @Service
+@RequiredArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService {
     private final UserRepository users;
-
-    public UserDetailsServiceImpl(UserRepository users){this.users=users;}
 
     @Override public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user=users.findByEmailIgnoreCase(username).orElseThrow(()->new UsernameNotFoundException("User not found"));

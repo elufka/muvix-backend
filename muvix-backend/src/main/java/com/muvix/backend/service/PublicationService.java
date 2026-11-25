@@ -15,18 +15,15 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.*;
-import java.util.stream.Collectors;
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 public class PublicationService {
     private final PublicationRepository publications;
     private final ProductRepository products;
     private final UserRepository users;
     private final PublicationMapper mapper;
-
-    public PublicationService(PublicationRepository publications,ProductRepository products,UserRepository users,PublicationMapper mapper){
-        this.publications=publications;this.products=products;this.users=users;this.mapper=mapper;
-    }
 
     @Transactional(readOnly=true)
     public PaginatedResponse<PublicationResponse> list(int page,int size){

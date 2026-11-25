@@ -16,7 +16,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import lombok.RequiredArgsConstructor;
 @Service
+@RequiredArgsConstructor
 public class AuthService {
     private final UserRepository users;
     private final UserMapper mapper;
@@ -24,7 +26,6 @@ public class AuthService {
     private final AuthenticationManager authManager;
     private final JwtService jwt;
 
-    public AuthService(UserRepository users,UserMapper mapper,PasswordEncoder encoder,AuthenticationManager authManager,JwtService jwt){this.users=users;this.mapper=mapper;this.encoder=encoder;this.authManager=authManager;this.jwt=jwt;}
 
     @Transactional public AuthResponse register(RegisterRequest request){
         String email=request.getEmail().trim().toLowerCase();

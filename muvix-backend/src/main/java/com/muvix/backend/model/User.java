@@ -2,9 +2,13 @@ package com.muvix.backend.model;
 
 import jakarta.persistence.*;
 import java.time.Instant;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "users", uniqueConstraints = @UniqueConstraint(name = "uk_users_email", columnNames = "email"))
+@Getter @Setter @NoArgsConstructor
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,30 +53,4 @@ public class User {
     @Column(nullable = false, updatable = false)
     private Instant createdAt = Instant.now();
 
-    public User() {}
-
-    public Long getId() { return id; }
-    public String getPhoto() { return photo; }
-    public void setPhoto(String photo) { this.photo = photo; }
-    public String getFirstName() { return firstName; }
-    public void setFirstName(String firstName) { this.firstName = firstName; }
-    public String getLastName() { return lastName; }
-    public void setLastName(String lastName) { this.lastName = lastName; }
-    public String getEmail() { return email; }
-    public void setEmail(String email) { this.email = email; }
-    public String getPasswordHash() { return passwordHash; }
-    public void setPasswordHash(String passwordHash) { this.passwordHash = passwordHash; }
-    public String getPhone() { return phone; }
-    public void setPhone(String phone) { this.phone = phone; }
-    public String getCountry() { return country; }
-    public void setCountry(String country) { this.country = country; }
-    public String getProvince() { return province; }
-    public void setProvince(String province) { this.province = province; }
-    public String getCity() { return city; }
-    public void setCity(String city) { this.city = city; }
-    public String getAddress() { return address; }
-    public void setAddress(String address) { this.address = address; }
-    public boolean isAdmin() { return admin; }
-    public boolean isActive() { return active; }
-    public void setActive(boolean active) { this.active = active; }
 }

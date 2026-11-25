@@ -3,8 +3,12 @@ package com.muvix.backend.model;
 import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity @Table(name="products")
+@Getter @Setter @NoArgsConstructor
 public class Product {
 
     public enum State { STORED, LISTED, SOLD }
@@ -40,12 +44,4 @@ public class Product {
     @Column(nullable=false)
     private State state=State.STORED;
 
-    public Product(){}
-    public Long getId(){return id;} public User getOwner(){return owner;} public void setOwner(User v){owner=v;}
-    public String getTitle(){return title;} public void setTitle(String v){title=v;}
-    public String getDescription(){return description;} public void setDescription(String v){description=v;}
-    public String getCategory(){return category;} public void setCategory(String v){category=v;}
-    public ProductCondition getCondition(){return condition;} public void setCondition(ProductCondition v){condition=v;}
-    public List<String> getImages(){return images;} public void setImages(List<String> v){images=v==null?new ArrayList<>():new ArrayList<>(v);}
-    public State getState(){return state;} public void setState(State v){state=v;}
 }
